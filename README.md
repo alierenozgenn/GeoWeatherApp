@@ -39,7 +39,6 @@ Bu proje, jQuery kullanarak geliştirilmiş dinamik bir hava durumu uygulamasıd
 
 Bu uygulama OpenWeatherMap API'sini kullanmaktadır. API anahtarı `script.js` dosyasında tanımlanmıştır:
 
-```javascript
-const apiKey = "YOUR_API_KEY";
 
-![Ekran Alıntısı](https://github.com/user-attachments/assets/faebbb22-45b2-4059-9c1f-80d89666683c)
+![Ekran Alıntısı](https://github.com/user-attachments/assets/af9a30a8-90f2-4678-bcfa-84796dc5768a)
+
