@@ -1,0 +1,322 @@
+/* Genel Stiller */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
+}
+
+/* Arama Alanı */
+.search-container {
+    display: flex;
+    margin-bottom: 25px;
+    gap: 10px;
+}
+
+#city-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#city-input:focus {
+    border-color: #6e8efb;
+    box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.3);
+}
+
+button {
+    width: 46px;
+    background-color: #6e8efb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #5a7af0;
+}
+
+#location-button {
+    background-color: #4CAF50;
+}
+
+#location-button:hover {
+    background-color: #3e8e41;
+}
+
+/* Son Aramalar */
+.recent-searches {
+    margin-bottom: 20px;
+}
+
+.recent-searches h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+#recent-searches-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 8px;
+}
+
+.recent-search-item {
+    background-color: #f0f0f0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.recent-search-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Hava Durumu Gösterimi */
+#weather-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#city-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+#date {
+    color: #666;
+    font-size: 14px;
+}
+
+#weather-icon {
+    width: 80px;
+    height: 80px;
+}
+
+.weather-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.temperature {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#temperature {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+#feels-like {
+    color: #666;
+    font-size: 14px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#description {
+    font-size: 18px;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.detail-item i {
+    width: 20px;
+    margin-right: 10px;
+    color: #6e8efb;
+}
+
+/* Tahmin Bölümü */
+.forecast {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.forecast-item {
+    flex: 0 0 auto;
+    width: 100px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.forecast-item:last-child {
+    margin-right: 0;
+}
+
+.forecast-date {
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.forecast-icon {
+    width: 40px;
+    height: 40px;
+    margin: 5px auto;
+}
+
+.forecast-temp {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Hata Mesajı */
+#error-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffebee;
+    border-radius: 8px;
+    color: #d32f2f;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#error-message i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* Yükleniyor Spinner */
+#loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(110, 142, 251, 0.3);
+    border-top: 4px solid #6e8efb;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Yardımcı Sınıflar */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .weather-info {
+        flex-direction: column;
+    }
+    
+    .temperature {
+        margin-bottom: 20px;
+        align-items: center;
+    }
+    
+    .details {
+        align-items: center;
+    }
+    
+    .forecast {
+        justify-content: flex-start;
+        margin: 0 -20px;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+    
+    #city-name {
+        font-size: 20px;
+    }
+    
+    #temperature {
+        font-size: 32px;
+    }
+    
+    #weather-icon {
+        width: 60px;
+        height: 60px;
+    }
+}

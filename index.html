@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu Uygulaması</title>
+    <!-- jQuery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hava Durumu Uygulaması</h1>
+        
+        <div class="search-container">
+            <input type="text" id="city-input" placeholder="Şehir adı girin...">
+            <button id="search-button"><i class="fas fa-search"></i></button>
+            <button id="location-button" title="Konumumu kullan"><i class="fas fa-map-marker-alt"></i></button>
+        </div>
+        
+        <div class="recent-searches">
+            <h3>Son Aramalar</h3>
+            <ul id="recent-searches-list"></ul>
+        </div>
+        
+        <div id="weather-container" class="hidden">
+            <div class="weather-header">
+                <div>
+                    <h2 id="city-name" aria-live="polite">Şehir bilgisi yükleniyor...</h2>
+                    <p id="date"></p>
+                </div>
+                <img id="weather-icon" src="" alt="Hava Durumu İkonu">
+            </div>
+            
+            <div class="weather-info">
+                <div class="temperature">
+                    <h3 id="temperature" aria-live="polite">Sıcaklık bilgisi yükleniyor...</h3>
+                    <p id="feels-like"></p>
+                </div>
+                
+                <div class="details">
+                    <p id="description"></p>
+                    <div class="detail-item">
+                        <i class="fas fa-tint"></i>
+                        <span id="humidity"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-wind"></i>
+                        <span id="wind"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                        <span id="pressure"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="forecast" id="forecast">
+                <!-- Burada 5 günlük tahmin gösterilecek -->
+            </div>
+        </div>
+        
+        <div id="error-message" class="hidden">
+            <i class="fas fa-exclamation-circle"></i>
+            <p></p>
+        </div>
+        
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Hava durumu bilgileri yükleniyor...</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
