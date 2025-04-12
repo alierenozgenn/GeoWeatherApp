@@ -1,9 +1,9 @@
-/* Genel Stiller */
+/* Geliştirilmiş Hava Durumu CSS - Ali Eren Özgen */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', 'Arial', sans-serif;
 }
 
 body {
@@ -13,16 +13,50 @@ body {
     justify-content: center;
     padding: 30px 20px;
     color: #333;
+    transition: background 1.5s ease-in-out;
+}
+
+/* Hava durumuna göre dinamik arka planlar */
+body.clear {
+    background: linear-gradient(135deg, #FF9966, #FF5E62);
+}
+
+body.clouds {
+    background: linear-gradient(135deg, #bdc3c7, #2c3e50);
+}
+
+body.rain {
+    background: linear-gradient(135deg, #3a7bd5, #3a6073);
+}
+
+body.snow {
+    background: linear-gradient(135deg, #E0EAFC, #CFDEF3);
+}
+
+body.mist {
+    background: linear-gradient(135deg, #757F9A, #D7DDE8);
+}
+
+body.thunderstorm {
+    background: linear-gradient(135deg, #4B79A1, #283E51);
 }
 
 .container {
     width: 100%;
     max-width: 800px;
     background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);
     padding: 30px;
     margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.8s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
@@ -30,6 +64,21 @@ h1 {
     margin-bottom: 30px;
     color: #333;
     font-size: 28px;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, #6e8efb, #a777e3);
+    border-radius: 2px;
 }
 
 /* Arama Alanı */
@@ -37,43 +86,63 @@ h1 {
     display: flex;
     margin-bottom: 25px;
     gap: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 #city-input {
     flex: 1;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 16px 20px;
+    border: 1px solid rgba(221, 221, 221, 0.5);
+    border-radius: 12px;
     font-size: 16px;
     outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 #city-input:focus {
     border-color: #6e8efb;
-    box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.3);
+    box-shadow: 0 0 15px rgba(110, 142, 251, 0.4);
+    transform: translateY(-2px);
 }
 
 button {
-    width: 46px;
+    width: 50px;
+    height: 55px;
     background-color: #6e8efb;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
     background-color: #5a7af0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(1px);
 }
 
 #location-button {
     background-color: #4CAF50;
+    animation: pulseShadow 2s infinite;
+}
+
+@keyframes pulseShadow {
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
 }
 
 #location-button:hover {
@@ -82,71 +151,129 @@ button:hover {
 
 /* Son Aramalar */
 .recent-searches {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .recent-searches h3 {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: #666;
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #555;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.recent-searches h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(to right, #6e8efb, #a777e3);
+    border-radius: 1.5px;
 }
 
 #recent-searches-list {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    gap: 8px;
+    gap: 10px;
 }
 
 .recent-search-item {
-    background-color: #f0f0f0;
-    padding: 6px 12px;
+    background-color: rgba(240, 240, 240, 0.7);
+    padding: 8px 16px;
     border-radius: 20px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .recent-search-item:hover {
-    background-color: #e0e0e0;
+    background-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Hava Durumu Gösterimi */
 #weather-container {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
     margin-top: 20px;
+    transition: all 0.5s;
+    animation: fadeIn 0.8s ease-out 0.2s both;
+    overflow: hidden;
+    position: relative;
 }
 
 .weather-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.weather-icon-bg {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    opacity: 0.1;
+    z-index: 0;
 }
 
 #city-name {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #333, #555);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    z-index: 1;
 }
 
 #date {
     color: #666;
-    font-size: 14px;
+    font-size: 16px;
+    position: relative;
+    z-index: 1;
 }
 
 #weather-icon {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
 .weather-info {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
+    position: relative;
+    z-index: 1;
 }
 
 .temperature {
@@ -156,39 +283,59 @@ button:hover {
 }
 
 #temperature {
-    font-size: 40px;
+    font-size: 60px;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(45deg, #6e8efb, #a777e3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 #feels-like {
     color: #666;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .details {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: rgba(240, 240, 240, 0.5);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #description {
-    font-size: 18px;
+    font-size: 20px;
     text-transform: capitalize;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    color: #444;
+    font-weight: 600;
 }
 
 .detail-item {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     color: #555;
+    transition: transform 0.3s;
+}
+
+.detail-item:hover {
+    transform: translateX(5px);
 }
 
 .detail-item i {
-    width: 20px;
-    margin-right: 10px;
+    width: 25px;
+    margin-right: 15px;
     color: #6e8efb;
+    font-size: 18px;
 }
 
 /* Tahmin Bölümü */
@@ -196,38 +343,87 @@ button:hover {
     display: flex;
     justify-content: space-between;
     overflow-x: auto;
-    padding-bottom: 10px;
+    padding: 15px 0;
+    margin: 0 -10px;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #6e8efb transparent;
+}
+
+.forecast::-webkit-scrollbar {
+    height: 6px;
+}
+
+.forecast::-webkit-scrollbar-thumb {
+    background-color: #6e8efb;
+    border-radius: 3px;
+}
+
+.forecast::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.forecast::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ddd, transparent);
 }
 
 .forecast-item {
     flex: 0 0 auto;
-    width: 100px;
+    min-width: 120px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 15px;
+    margin: 0 10px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 10px;
-    margin-right: 10px;
+    perspective: 1000px;
 }
 
-.forecast-item:last-child {
-    margin-right: 0;
+.forecast-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.forecast-item:hover .forecast-icon {
+    transform: rotateY(180deg);
 }
 
 .forecast-date {
-    font-size: 12px;
-    margin-bottom: 5px;
-    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+    font-weight: 600;
 }
 
 .forecast-icon {
-    width: 40px;
-    height: 40px;
-    margin: 5px auto;
+    width: 50px;
+    height: 50px;
+    margin: 10px auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
 }
 
 .forecast-temp {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
+    color: #444;
+}
+
+.forecast-description {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+    text-transform: capitalize;
 }
 
 /* Hata Mesajı */
@@ -235,17 +431,28 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background-color: #ffebee;
-    border-radius: 8px;
+    padding: 25px;
+    background-color: rgba(255, 235, 238, 0.9);
+    border-radius: 12px;
     color: #d32f2f;
-    margin-top: 20px;
+    margin-top: 25px;
     text-align: center;
+    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.2);
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    border: 1px solid rgba(211, 47, 47, 0.3);
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
 }
 
 #error-message i {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: 45px;
+    margin-bottom: 15px;
+    color: #d32f2f;
 }
 
 /* Yükleniyor Spinner */
@@ -253,17 +460,17 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
+    margin: 40px 0;
 }
 
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(110, 142, 251, 0.3);
-    border-top: 4px solid #6e8efb;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(110, 142, 251, 0.2);
+    border-top: 5px solid #6e8efb;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 @keyframes spin {
@@ -271,52 +478,645 @@ button:hover {
     100% { transform: rotate(360deg); }
 }
 
-/* Yardımcı Sınıflar */
-.hidden {
-    display: none !important;
+#loading p {
+    color: #555;
+    font-size: 16px;
 }
 
-/* Responsive Tasarım */
+/* Ek Bilgiler Bölümü */
+.extra-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.extra-info-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.extra-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.extra-info-card i {
+    font-size: 24px;
+    color: #6e8efb;
+    margin-bottom: 10px;
+}
+
+.extra-info-card h4 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.extra-info-card p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Ali Eren Özgen İmzası */
+.signature {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: #666;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.signature p {
+    margin-bottom: 5px;
+}
+
+.signature .name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #6e8efb, #a777e3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.signature .date {
+    font-size: 12px;
+    color: #999;
+}
+
+/* Animasyonlu Arka Plan Efektleri */
+.weather-bg-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.sun {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #FF9966, rgba(255, 153, 102, 0));
+    border-radius: 50%;
+    box-shadow: 0 0 60px 30px rgba(255, 153, 102, 0.7);
+    animation: pulse 4s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.sun.visible {
+    opacity: 1;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: float-cloud 15s linear infinite;
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.cloud.visible {
+    opacity: 1;
+}
+
+.cloud:nth-child(1) {
+    width: 100px;
+    height: 60px;
+    top: 20%;
+    left: -100px;
+    animation-duration: 90s;
+}
+
+.cloud:nth-child(2) {
+    width: 160px;
+    height: 80px;
+    top: 40%;
+    left: -160px;
+    animation-duration: 120s;
+    animation-delay: 10s;
+}
+
+.cloud:nth-child(3) {
+    width: 120px;
+    height: 70px;
+    top: 30%;
+    left: -120px;
+    animation-duration: 100s;
+    animation-delay: 20s;
+}
+
+@keyframes float-cloud {
+    0% { left: -200px; }
+    100% { left: calc(100% + 200px); }
+}
+
+.rain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.rain.visible {
+    opacity: 1;
+}
+
+.raindrop {
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.7));
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(calc(100vh + 100px)); }
+}
+
+.snow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.snow.visible {
+    opacity: 1;
+}
+
+.snowflake {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: fall-snow linear infinite, sway 3s ease-in-out infinite alternate;
+    opacity: 0.7;
+}
+
+@keyframes fall-snow {
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(calc(100vh + 100px)); }
+}
+
+@keyframes sway {
+    0% { margin-left: 0; }
+    100% { margin-left: 30px; }
+}
+
+/* Geliştirilmiş Responsive Tasarım */
 @media (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+    
     .container {
         padding: 20px;
     }
     
     .weather-info {
         flex-direction: column;
+        gap: 20px;
     }
     
     .temperature {
-        margin-bottom: 20px;
         align-items: center;
+    }
+    
+    #temperature {
+        font-size: 48px;
     }
     
     .details {
-        align-items: center;
+        width: 100%;
     }
     
     .forecast {
-        justify-content: flex-start;
-        margin: 0 -20px;
-        padding: 0 20px;
+        padding: 10px 0;
+    }
+    
+    .extra-info {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    
+    #city-name {
+        font-size: 22px;
+    }
+    
+    /* Arama bölümü iyileştirmeleri */
+    .search-container {
+        flex-wrap: wrap;
+    }
+    
+    #city-input {
+        flex: 1 1 70%;
+    }
+
+    #city-input:focus {
+        animation: wave 0.6s ease;
+    }
+    
+    @keyframes wave {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.03); }
+        100% { transform: scale(1); }
+      }
+
+    #search-button, #location-button {
+        flex: 0 0 45px;
     }
 }
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 24px;
+        font-size: 20px;
+        margin-bottom: 20px;
     }
     
-    #city-name {
+    .container {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    #city-input {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    button {
+        width: 42px;
+        height: 45px;
+        font-size: 16px;
+    }
+    
+    .weather-header {
+        flex-direction: column;
+    }
+    
+    #weather-icon {
+        width: 70px;
+        height: 70px;
+        margin-top: 10px;
+    }
+    
+    #temperature {
+        font-size: 36px;
+    }
+    
+    #description {
+        font-size: 16px;
+    }
+    
+    .forecast-item {
+        min-width: 90px;
+        padding: 10px;
+    }
+    
+    .forecast-date {
+        font-size: 12px;
+    }
+    
+    .forecast-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .forecast-temp {
+        font-size: 16px;
+    }
+    
+    .extra-info {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .extra-info-card {
+        padding: 10px;
+    }
+    
+    .extra-info-card i {
         font-size: 20px;
+    }
+    
+    .extra-info-card h4 {
+        font-size: 12px;
+    }
+    
+    .extra-info-card p {
+        font-size: 14px;
+    }
+    
+    /* Grafiği daha küçük ekrana uyarla */
+    .temperature-chart-container {
+        height: 200px; /* Grafiğin yüksekliğini azalt */
+    }
+    
+    /* Son aramalar bölümü */
+    .recent-search-item {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Çok küçük ekranlar için ekstra ayarlar */
+@media (max-width: 350px) {
+    .container {
+        padding: 12px;
+    }
+    
+    .search-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    #city-input, #search-button, #location-button {
+        width: 100%;
+    }
+    
+    #search-button, #location-button {
+        height: 40px;
     }
     
     #temperature {
         font-size: 32px;
     }
     
-    #weather-icon {
-        width: 60px;
-        height: 60px;
+    .forecast {
+        justify-content: flex-start;
     }
+    
+    .forecast-item {
+        min-width: 80px;
+        padding: 8px;
+    }
+    
+    .extra-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Yardımcı Sınıflar */
+.hidden {
+    display: none !important;
+}
+
+.fadeIn {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.fadeOut {
+    animation: fadeOut 0.8s ease-out;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(20px); }
+}
+
+/* Tüm yazıları koyu zemine göre daha açık yap */
+body.night-theme {
+    background: linear-gradient(135deg, #0d1117, #1c1f26);
+    color: #e0e0e0 !important;
+}
+
+body.night-theme * {
+    color: #e0e0e0 !important;
+}
+
+/* Koyu tema için kutu arka planları */
+body.night-theme .container,
+body.night-theme .details,
+body.night-theme .forecast-item,
+body.night-theme .extra-info-card,
+body.night-theme .recent-searches,
+body.night-theme .search-container,
+body.night-theme #weather-container,
+body.night-theme #error-message,
+body.night-theme #loading {
+    background-color: rgba(30, 30, 30, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Giriş kutusu */
+body.night-theme #city-input {
+    background-color: rgba(50, 50, 50, 0.9);
+    color: #eee;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.night-theme #city-input::placeholder {
+    color: #aaa;
+}
+
+/* Düğmeler */
+body.night-theme button {
+    background-color: #4a6fe3 !important;
+    color: #fff !important;
+}
+
+body.night-theme button:hover {
+    background-color: #6e8efb !important;
+}
+
+body.night-theme #location-button {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+body.night-theme #location-button:hover {
+    background-color: #3e8e41 !important;
+}
+
+/* Hava durumu ikonları */
+body.night-theme #weather-icon,
+body.night-theme .forecast-icon {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+}
+
+/* Grafik çerçevesi düzeltme */
+body.night-theme .temperature-chart-container {
+    background-color: rgba(20, 20, 20, 0.4);
+}
+
+/* İmza kısmı */
+body.night-theme .signature .name {
+    background: linear-gradient(45deg, #82aaff, #a777e3);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Gece modunda son arama butonları şık gri kutular */
+body.night-theme .recent-search-item {
+    background-color: rgba(80, 80, 80, 0.6);
+    color: #eee !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+body.night-theme .recent-search-item:hover {
+    background-color: rgba(100, 100, 100, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Gece Modu Yıldızlı Arka Plan */
+.stars-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -2;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+/* Yalnızca gece modunda aktif olsun */
+body.night-theme .stars-bg {
+    opacity: 1;
+}
+
+body.night-theme .stars-bg::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    box-shadow:
+        10vw 20vh white,
+        30vw 10vh white,
+        50vw 30vh white,
+        70vw 50vh white,
+        90vw 70vh white,
+        25vw 80vh white,
+        60vw 25vh white,
+        85vw 15vh white,
+        40vw 70vh white,
+        15vw 60vh white;
+    animation: twinkle 3s ease-in-out infinite alternate;
+    opacity: 0.8;
+}
+
+body.night-theme .animated-bg {
+    display: none;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 0.3; transform: scale(1); }
+}
+
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -3;
+    pointer-events: none;
+}
+
+.animated-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.advice-message {
+    background-color: rgba(110, 142, 251, 0.1);
+    border-left: 4px solid #6e8efb;
+    padding: 15px 20px;
+    margin: 20px 0;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: #444;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+}
+
+body.night-theme .advice-message {
+    background-color: rgba(40, 40, 60, 0.5);
+    border-left-color: #82aaff;
+    color: #eee;
+}
+
+/* Şimşek flaşı efekti */
+.lightning-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Sayfa titreme efekti */
+@keyframes pageShake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-5px, 5px); }
+    50% { transform: translate(5px, -5px); }
+    75% { transform: translate(-5px, -5px); }
+    100% { transform: translate(0, 0); }
+}
+
+.shake {
+    animation: pageShake 0.4s ease;
+}
+
+.weather-bg-effect .sun,
+.weather-bg-effect .cloud,
+.weather-bg-effect .rain,
+.weather-bg-effect .snow {
+    transition: opacity 1.2s ease, transform 1s ease;
+    transform: scale(1);
+}
+
+.weather-bg-effect .fade-out {
+    opacity: 0 !important;
+    transform: scale(0.95);
+}
+
+.weather-bg-effect .fade-in {
+    opacity: 1 !important;
+    transform: scale(1);
 }

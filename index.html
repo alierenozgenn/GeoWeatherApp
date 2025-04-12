@@ -3,28 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hava Durumu Uygulaması</title>
+    <title>Hava Durumu Uygulaması | Ali Eren Özgen</title>
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- jQuery CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Dinamik Hava Durumu Arka Plan Efektleri -->
+    
+    <div class="animated-bg">
+        <video id="weather-video" autoplay muted loop playsinline></video>
+    </div>
+    
+    <div class="stars-bg"></div>
+    <div class="weather-bg-effect">
+        <div class="sun"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="rain"></div>
+        <div class="snow"></div>
+    </div>
+
     <div class="container">
         <h1>Hava Durumu Uygulaması</h1>
         
         <div class="search-container">
-            <input type="text" id="city-input" placeholder="Şehir adı girin...">
-            <button id="search-button"><i class="fas fa-search"></i></button>
-            <button id="location-button" title="Konumumu kullan"><i class="fas fa-map-marker-alt"></i></button>
+            <input type="text" id="city-input" placeholder="Şehir adı girin..." aria-label="Şehir adı girin">
+            <button id="search-button" aria-label="Ara"><i class="fas fa-search"></i></button>
+            <button id="location-button" title="Konumumu kullan" aria-label="Konumumu kullan"><i class="fas fa-map-marker-alt"></i></button>
         </div>
         
         <div class="recent-searches">
             <h3>Son Aramalar</h3>
             <ul id="recent-searches-list"></ul>
         </div>
+
+        <div id="advice-message" class="advice-message hidden"></div>
         
         <div id="weather-container" class="hidden">
             <div class="weather-header">
@@ -58,8 +82,42 @@
                 </div>
             </div>
             
+            <div class="temperature-chart-container">
+                <canvas id="temperatureChart"></canvas>
+            </div>
+            
+            <div class="extra-info">
+                <div class="extra-info-card">
+                    <i class="fas fa-sun"></i>
+                    <h4>Gün Doğumu</h4>
+                    <p id="sunrise">--:--</p>
+                </div>
+                <div class="extra-info-card">
+                    <i class="fas fa-moon"></i>
+                    <h4>Gün Batımı</h4>
+                    <p id="sunset">--:--</p>
+                </div>
+                <div class="extra-info-card">
+                    <i class="fas fa-eye"></i>
+                    <h4>Görüş Mesafesi</h4>
+                    <p id="visibility">-- km</p>
+                </div>
+                <div class="extra-info-card">
+                    <i class="fas fa-cloud"></i>
+                    <h4>Bulutluluk</h4>
+                    <p id="clouds">--%</p>
+                </div>
+            </div>
+            
+            <h3 class="forecast-title">5 Günlük Tahmin</h3>
             <div class="forecast" id="forecast">
                 <!-- Burada 5 günlük tahmin gösterilecek -->
+            </div>
+            
+            <div class="signature">
+                <p>Tasarım & Geliştirme</p>
+                <div class="name">Ali Eren Özgen</div>
+                <div class="date">© <span id="current-year">2025</span></div>
             </div>
         </div>
         
@@ -75,5 +133,7 @@
     </div>
     
     <script src="script.js"></script>
+    <div id="lightning" class="lightning-flash"></div>
+
 </body>
 </html>
