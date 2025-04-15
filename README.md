@@ -1,3 +1,5 @@
+https://weatherappasd.netlify.app/
+
 # jQuery ile Hava Durumu Uygulaması
 
 Bu proje, jQuery kullanarak geliştirilmiş dinamik bir hava durumu uygulamasıdır. Kullanıcılar şehir ismi girerek anlık hava durumu bilgilerini görüntüleyebilirler.
