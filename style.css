@@ -1120,3 +1120,35 @@ body.night-theme .advice-message {
     opacity: 1 !important;
     transform: scale(1);
 }
+
+@media (max-width: 768px) {
+    .animated-bg video {
+        display: none !important;
+    }
+
+    .animated-bg {
+        display: none !important;
+    }
+}
+@media (max-width: 768px) {
+    .weather-bg-effect .sun {
+        width: 60px;
+        height: 60px;
+        top: 10%;
+        right: 10%;
+    }
+
+    .weather-bg-effect .cloud {
+        width: 80px !important;
+        height: 50px !important;
+    }
+
+    .weather-bg-effect .snowflake {
+        width: 5px !important;
+        height: 5px !important;
+    }
+
+    .weather-bg-effect .raindrop {
+        width: 1.5px !important;
+    }
+}

@@ -77,6 +77,8 @@ $(document).ready(function() {
     
     // Hava Durumu Verilerini API'den Alma
     function getWeatherData(city) {
+        city = city.trim().charAt(0).toUpperCase() + city.trim().slice(1).toLowerCase();
+
         showLoading();
         hideError();
         
@@ -639,3 +641,8 @@ function startLightningEffect() {
         $searchButton.click();
     }, 500);
 });
+
+video.onerror = function () {
+    console.warn('Video yüklenemedi, arka plan videosu devre dışı.');
+    video.style.display = "none"; // görünmez yap
+};
